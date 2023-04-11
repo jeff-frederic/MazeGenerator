@@ -1,2 +1,2 @@
-# maze-inator
+# Maze - Inator
 Maze generation.
