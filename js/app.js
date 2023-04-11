@@ -22,8 +22,11 @@ class Cell {
         this.y = y;
         this.width = width;
         this.height = height;
-        // Active Walls = [top, left, bottom, right];
-        this.walls = [true, true, true, true];
+        
+        this.walls = [true, true, true, true];      // [top, left, bottom, right]
+        
+        this.active = false;
+        this.visited = false;
     }
 
     generateCell(){
@@ -32,7 +35,9 @@ class Cell {
     }
 
     generateCellRect(){
-        ctx.fillStyle = 'lightgrey';
+        if(this.active){ctx.fillStyle = 'green';}
+        else if(this.visited){ctx.fillStyle = 'lightgreen';}
+        else{ctx.fillStyle = '#FFF';}
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
@@ -53,9 +58,12 @@ class Cell {
             ctx.moveTo(this.x+this.width, this.y);
             ctx.lineTo(this.x+this.width, this.y+this.height);
         }
-
     }
 
+    setActive(){
+        this.active = true;
+        this.generateCell();
+    }
 }
 
 generateGrid();
