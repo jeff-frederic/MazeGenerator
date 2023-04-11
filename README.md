@@ -1,0 +1,2 @@
+# maze-inator
+Maze generation.
