@@ -1,4 +1,6 @@
 /**
- * Sketch file that allows us to create a maze using P5.js library. 
- * 
+ * Sketch that allows you to create a squre maze.
+ *  
+ * TODO: 
+ *  - Figure out a way to create a grid of just cells
  */
