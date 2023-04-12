@@ -1,11 +1,14 @@
 import * as view from "./views.js"
 
 export class Cell {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, row, col) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+
+        this.row = row;
+        this.col = col;
         
         this.walls = [true, true, true, true];      // [north, west, south, east]
         
@@ -72,10 +75,18 @@ export class Cell {
         this.generateCell();
     }
 
+    setActive(){
+        this.active = true;
+        this.setVisited();
+    }
+
     setVisited(){
         this.visited = true;
         this.generateCell();
     }
+
+    getRow(){return this.row;}
+    getCol(){return this.col;}
 }
 
 export class Grid{
@@ -89,7 +100,7 @@ export class Grid{
             this.grid[i] = new Array(view.columns);
             for(let j=0; j*view.cellWidth<view.canvas.width; j++){
                 view.ctx.beginPath();
-                const cell = new Cell(j*view.cellWidth, i*view.cellHeight, view.cellWidth, view.cellHeight);
+                const cell = new Cell(j*view.cellWidth, i*view.cellHeight, view.cellWidth, view.cellHeight, i, j);
                 this.grid[i][j] = cell;
                 cell.generateCell()
                 view.ctx.stroke();
@@ -97,12 +108,16 @@ export class Grid{
         }
     }
 
+    getCell(x, y){
+        return this.grid[x][y];
+    }
+
     clearGrid(){
         view.ctx.clearRect(0,0,view.canvas.width,view.canvas.height);
     }
 
     getCellNeighbors(row, column){
-        const neighbors = [];
+        let neighbors = [];
         let north, west, south, east;
         
         if(row == 0){
@@ -134,5 +149,48 @@ export class Grid{
         }
 
         return neighbors;
+    }
+
+    DepthFirstSearch(x, y){
+        let cell = this.grid[x][y];
+        cell.setActive();
+
+        let neighbors = this.getCellNeighbors(x, y);
+
+        while(neighbors.length > 0){
+            let index = Math.floor(Math.random() * neighbors.length)
+            if(!neighbors[index].visited){
+                this.removeNeighboringWall(cell, neighbors[index]);
+                this.DepthFirstSearch(neighbors[index].getRow(), neighbors[index].getCol());
+            }
+            neighbors.splice(index, 1);
+        }
+    }
+
+    removeNeighboringWall(cell, neighbor){
+        let neighborX = neighbor.getRow();
+        let neighborY = neighbor.getCol();
+        let cellX = cell.getRow();
+        let cellY = cell.getCol();
+        
+        if(neighborX+1 == cellX){
+            neighbor.disableWall('south');
+            cell.disableWall('north');
+        }
+
+        if(neighborX-1 == cellX){
+            neighbor.disableWall('north');
+            cell.disableWall('south');
+        }
+
+        if(neighborY-1 == cellY){
+            neighbor.disableWall('west');
+            cell.disableWall('east');
+        }
+
+        if(neighborY+1 == cellY){
+            neighbor.disableWall('east');
+            cell.disableWall('west');
+        }
     }
 }
