@@ -1,19 +1,24 @@
 
 
 export class Cell{
-    constructor(row, column, width, height){
+    constructor(row, column){
         this.row = row;
-        this.column = column;
-        this.width = width;
-        this.height = height;
+        this.col = column;
 
         this.active = false;
         this.visited = false;
 
+        // Order   = [top,  left, bottom, right]
         this.walls = [true, true, true, true]; 
     }
 
-    get coordinates(){
-        return [this.row, this.column];
+
+    setActive(isActive){
+        this.active = isActive;
     }
+
+    setVisited(isVisited){
+        this.visited = isVisited;
+    }
+
 }
