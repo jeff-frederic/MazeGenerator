@@ -1,4 +1,4 @@
-
+import * as constant from "./constants.js";
 
 export function buildView(){
     const canvas = document.getElementById('mazeCanvas');
@@ -8,8 +8,8 @@ export function buildView(){
 
     // TODO: Needs to be moved
     //  -- Want to get the rows and cols from the client
-    const numRows = 30;
-    const numCols = 30;
+    const numRows = constant.NUM_OF_ROWS;
+    const numCols = constant.NUM_OF_COLS;
 
     // TODO: Needs to be moved
     //  -- Possibly into the constants file
@@ -20,6 +20,11 @@ export function buildView(){
 
     const cellWidth = Math.floor(canvasWidth/numRows);
     const cellHeight = Math.floor(canvasHeight/numCols);
+
+    // TODO: Resizing window issue
+    //  -- Find a way to fix the canvas alignment when the window is resized
+    //  -- Possibly add a container that wraps the maze, which would also need to be resized
+    //      -- Take a look at resource online on how to do this
 
     return {
         generateCell(cell){
@@ -68,5 +73,7 @@ export function buildView(){
                 context.stroke();
             }
         }
+        //TODO: clearCanvas function
+        //  -- sets a big rectangle on top of the canvas
     }
 }
