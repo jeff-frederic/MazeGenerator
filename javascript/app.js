@@ -1,5 +1,6 @@
 import { Cell } from "./models.js";
+import { buildView } from "./views.js";
 
-
-let cell = new Cell(1, 1, 1, 1);
-console.log(cell.coordinates);
+let cell = new Cell(0, 0);
+let view = buildView();
+view.generateCell(cell);
