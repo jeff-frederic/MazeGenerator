@@ -13,10 +13,10 @@ export function buildView(){
 
     // TODO: Needs to be moved
     //  -- Possibly into the constants file
-    const activeColor = 'green';
-    const visitedColor = 'lightgreen';
-    const unvisitedColor = 'lightblue';
-    const wallColor = 'red';
+    const activeColor = 'red';
+    const visitedColor = 'lightblue';
+    const unvisitedColor = 'grey';
+    const wallColor = 'black';
 
     const cellWidth = Math.floor(canvasWidth/numRows);
     const cellHeight = Math.floor(canvasHeight/numCols);

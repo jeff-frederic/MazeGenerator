@@ -1,4 +1,4 @@
-
+import * as constant from "./constants.js"
 
 export class Cell{
     constructor(row, column){
@@ -73,9 +73,68 @@ export class Grid{
         }
     }
 
-    getCell(row, col){
+    cell(row, col){
         return this.grid[row][col];
     }
 
-    // TODO: getNeighborCells function
-}
+    neighbors(cell){
+        let neighbors = [];
+        let top, left, bottom, right;
+        let cellX = cell.row, cellY = cell.col;
+
+        if(cellX == 0){
+            bottom = this.cell(cellX+1, cellY);
+            if (!bottom.visited){neighbors.push(bottom);}
+        }
+        else if(cellX == constant.NUM_OF_ROWS-1){
+            top = this.cell(cellX-1, cellY);
+            if(!top.visited){neighbors.push(top);}
+        }
+        else{
+            top = this.cell(cellX-1, cellY);
+            bottom = this.cell(cellX+1, cellY);
+            if(!top.visited){neighbors.push(top);}
+            if(!bottom.visited){neighbors.push(bottom);}
+        }
+        
+        if(cellY == 0){
+            right = this.cell(cellX, cellY+1);
+            if(!right.visited){neighbors.push(right);}
+        }
+        else if(cellY == constant.NUM_OF_COLS-1){
+            left = this.cell(cellX, cellY-1);
+            if(!left.visited){neighbors.push(left);}
+        }
+        else{
+            right = this.cell(cellX, cellY+1);
+            left = this.cell(cellX, cellY-1);
+            if(!right.visited){neighbors.push(right);}
+            if(!left.visited){neighbors.push(left);}
+        }
+        
+        return neighbors;
+    }
+
+    removeWall(cell, neighbor){
+        if(cell.row == neighbor.row){
+            if(cell.col == neighbor.col+1){
+                cell.disableWall('top');
+                neighbor.disableWall('bottom');
+            }
+            else{
+                cell.disableWall('bottom');
+                neighbor.disableWall('top');
+            }
+        }
+        else{
+            if(cell.row == neighbor.row+1){
+                cell.disableWall('left');
+                neighbor.disableWall('right');
+            }
+            else{
+                cell.disableWall('right');
+                neighbor.disableWall('left');
+            }
+        }
+    }
+}   
