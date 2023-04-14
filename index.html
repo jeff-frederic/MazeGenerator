@@ -6,10 +6,27 @@
     </head>
     <body>
         <div id="container">
-            <canvas id="mazeCanvas" width="700px" height="700px" style="border: 2px solid black;"></canvas>
-            <script src="javascript/app.js" type="module"></script>
-            <script src="javascript/models.js" type="module"></script>
-            <script src="javascript/views.js" type="module"></script>
+            <div id="maze">
+                <canvas id="mazeCanvas" width="700px" height="700px"></canvas>
+                <script src="javascript/app.js" type="module"></script>
+                <script src="javascript/models.js" type="module"></script>
+                <script src="javascript/views.js" type="module"></script>
+            </div>
+
+            <div id="menu">
+                <h2>MAZE-INATOR</h2>
+                <div>
+                    <button id="create">CREATE</button>
+                </div>
+
+                <div>
+                    <label for="dimension">Dimesions:</label>
+                    <input type="number" name="dimension" id="dimensionInput" min="5" max="100">
+    
+                </div>
+                
+                <h4><i>&copy;jeff-frederic</i></h4>
+            </div>
         </div>
     </body>
 </html>

@@ -11,14 +11,16 @@ function displayGrid(view, grid){
     }
 }
 
+// TODO: Move into the view file
+//  -- This has to do going through each cell and viewing it.
+//  -- Has a diagonal view to it
+
 // Use this function later to reset the board in a cool fashion
-function movement(view, grid){
-    let interval;
+function diagonalDisplay(view, grid){
     for(let i=0; i<constant.NUM_OF_ROWS; i++){
         for(let j=0; j<constant.NUM_OF_COLS; j++){
             let cell = grid.cell(i, j);
-            cell.active=true;
-            interval = setTimeout(view.generateCell, (i+(2*j))*20, cell);
+            setTimeout(view.generateCell, (i+j)*50, cell);
         }
     }
 }
@@ -27,32 +29,46 @@ window.onload = () => {
     let view = buildView();
     let grid = new Grid(constant.NUM_OF_ROWS, constant.NUM_OF_COLS);
     displayGrid(view, grid);
-    //movement(view, grid);
+
     let randomRow = Math.floor(Math.random() * constant.NUM_OF_ROWS);
     let randomCol = Math.floor(Math.random() * constant.NUM_OF_COLS);
 
-    DepthFirstSearch(view, grid, grid.cell(randomRow, randomCol));
+    DepthFirstSearch(view, grid, grid.cell(randomRow, randomCol), 1);
+    diagonalDisplay(view, grid);
+
 }
 
 // TODO: Recursive backtracking algorithm
 //  -- Might need to put this is another file
 //  -- Try to do this recursively AND non-recursively
-function DepthFirstSearch(view, grid, cell){
-    let timeout = 50;
-    let neighbors = grid.neighbors(cell);
-    cell.active = true;
-    setTimeout(view.generateCell, timeout, cell);
-    cell.active = false;
+
+
+async function DepthFirstSearch(view, grid, randomCell, delay){
+    let stack = [];
+    stack.push(randomCell);
     
-    while(neighbors.length > 0){
-        let randomCell = selectRandomDelete(neighbors);
-        if(!randomCell.visited){
-            randomCell.visited = true;
-            grid.removeWall(cell, randomCell);
-            setTimeout(view.generateCell, timeout, randomCell);
-            DepthFirstSearch(view, grid, randomCell);
+    while (stack.length > 0) {
+        let currentCell = stack.pop();
+        
+        currentCell.visited = true;
+        view.generateCell(currentCell);
+        
+        if(delay){
+            await new Promise(resolve => setTimeout(resolve, 100));
         }
-    }
+    
+        let neighbors = grid.neighbors(currentCell);
+        if (neighbors.length > 0) {
+          let randomIndex = Math.floor(Math.random() * neighbors.length);
+          let nextCell = neighbors[randomIndex];
+    
+          grid.removeWall(currentCell, nextCell);
+          grid.removeWall(nextCell, currentCell);
+    
+          stack.push(currentCell);
+          stack.push(nextCell);
+        }
+      }
 }
 
 

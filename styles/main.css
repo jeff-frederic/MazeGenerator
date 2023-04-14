@@ -1,13 +1,23 @@
 html, body{
-    background-color: rgb(143, 143, 168);
+    margin-top: 20px;
+    background-color: lightgray;
 }
 
 #container{
     display: flex;
     justify-content: center;
-    align-items: center;
-    padding: 10px;
-    max-height: 100%;
-    height: auto;
-    width: auto;
+}
+
+#menu{
+    background-color: lightcyan;
+    border-radius: 45px;
+    padding: 25px;
+    max-width: 200px;
+    display: grid;
+}
+
+#maze{
+    display: flex;
+    justify-content: center;
+    padding: 25px;
 }

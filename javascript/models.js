@@ -51,6 +51,12 @@ export class Cell{
                 break;
         }
     }
+
+    resetCell(){
+        this.active = false;
+        this.visited = false;
+        this.walls = [true, true, true, true];
+    }
 }
 
 
@@ -118,22 +124,22 @@ export class Grid{
     removeWall(cell, neighbor){
         if(cell.row == neighbor.row){
             if(cell.col == neighbor.col+1){
-                cell.disableWall('top');
                 neighbor.disableWall('bottom');
+                cell.disableWall('top');
             }
             else{
-                cell.disableWall('bottom');
                 neighbor.disableWall('top');
+                cell.disableWall('bottom');
             }
         }
         else{
             if(cell.row == neighbor.row+1){
-                cell.disableWall('left');
                 neighbor.disableWall('right');
+                cell.disableWall('left');
             }
             else{
-                cell.disableWall('right');
                 neighbor.disableWall('left');
+                cell.disableWall('right');
             }
         }
     }

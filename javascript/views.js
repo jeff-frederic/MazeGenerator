@@ -14,8 +14,8 @@ export function buildView(){
     // TODO: Needs to be moved
     //  -- Possibly into the constants file
     const activeColor = 'red';
-    const visitedColor = 'lightblue';
-    const unvisitedColor = 'grey';
+    const visitedColor = 'white';
+    const unvisitedColor = 'lightgrey';
     const wallColor = 'black';
 
     const cellWidth = Math.floor(canvasWidth/numRows);
@@ -73,7 +73,7 @@ export function buildView(){
                 context.stroke();
             }
         }
-        //TODO: clearCanvas function
-        //  -- sets a big rectangle on top of the canvas
+        
+        // 
     }
 }
