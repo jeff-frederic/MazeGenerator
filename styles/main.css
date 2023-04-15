@@ -1,4 +1,70 @@
-html, body{
+html{
+    margin:0;
+    padding: 0;
+}
+
+body{
     margin: 0;
     padding: 0;
+}
+
+#menu{
+    display: grid;
+    padding: 20px;
+    background-color: grey;
+    border-radius: 30px;
+    border: 3px solid black;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+#title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30pt;
+    font-weight: bolder;
+    text-align: center;
+}
+
+#options ul{
+    display: flex;
+    justify-content: center;
+}
+
+#options li{
+    list-style: none;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 15pt;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#buttons{
+    margin-top: 30px;
+    text-align: center;
+}
+
+#buttons button{
+    font-size: 15pt;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#buttons button:hover{
+    background-color: lightgray;
+}
+
+#canvasContainer{
+    margin-top: 50px;
+    text-align: center;
+
 }
