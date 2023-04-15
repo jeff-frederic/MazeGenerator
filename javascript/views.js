@@ -64,8 +64,14 @@ export function buildView(){
                 }
             }
         },
-        resetGrid(){
-
+        clearGridColors(grid){
+            for(let i=0; i<c.NUM_OF_ROWS; i++){
+                for(let j=0; j<c.NUM_OF_COLS; j++){
+                    let cell = grid.at(i, j);
+                    cell.resetCellFlags();
+                    this.displayCell(cell);
+                }
+            }
         }
     }
 }

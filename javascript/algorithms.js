@@ -27,4 +27,21 @@ export async function DepthFirstSearch(view, cell, grid, delay){
             stack.push(adj);
         }
     }
+
+    await new Promise(resolve => setTimeout(resolve, 300));
+    view.clearGridColors(grid);
+}
+
+
+export async function solution(view, currentCell, endCell){
+    if(currentCell === endCell){
+        return true;
+    }
+
+    
+}
+
+
+export function randomInt(max){
+    return Math.floor(Math.random() * max);
 }

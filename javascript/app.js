@@ -2,7 +2,7 @@
 
 import { Cell, Grid } from "./models.js";
 import { buildView } from "./views.js"
-import { DepthFirstSearch } from "./algorithms.js";
+import { DepthFirstSearch , randomInt} from "./algorithms.js";
 import * as c from "./constants.js";
 
 window.onload = () => {
@@ -11,7 +11,6 @@ window.onload = () => {
     grid.load();
     view.displayGrid(grid);
 
-    DepthFirstSearch(view, grid.at(5,8), grid, 10);
-
-
+    let randomCell = grid.at(randomInt(c.NUM_OF_ROWS), randomInt(c.NUM_OF_COLS))
+    DepthFirstSearch(view, randomCell, grid, 0);
 }

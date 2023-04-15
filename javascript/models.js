@@ -39,10 +39,15 @@ export class Cell{
         }
     }
 
-    reset(){
+    resetCell(){
         this.active = false;
         this.visited = false;
         this.walls = [true, true, true, true];
+    }
+
+    resetCellFlags(){
+        this.active = false;
+        this.visited = false;
     }
 }
 
