@@ -28,6 +28,7 @@ export function buildView(){
             if(cell.active){ctx.fillStyle = c.CELL_ACTIVE_COLOR;}
             else if(cell.visited){ctx.fillStyle = c.CELL_VISITED_COLOR;}
             else{ctx.fillStyle = c.CELL_UNVISITED_COLOR;}
+            if(cell.target){ctx.fillStyle = c.CELL_TARGET_COLOR;}
             ctx.fillRect(x, y, CELL_WIDTH, CELL_HEIGHT);
 
             // Displaying cell walls

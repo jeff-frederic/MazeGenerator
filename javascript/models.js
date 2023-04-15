@@ -15,6 +15,7 @@ export class Cell{
 
         this.active = false;
         this.visited = false;
+        this.target = false;
 
         this.walls = [true, true, true, true];
         // Walls => {top, left, bottom, right}
@@ -105,13 +106,15 @@ export class Grid{
         return neighbors;
     }
 
-    unvisitedNeighbors(cell){
-        let n = this.neighbors(cell);
-        let unvisited = [];
-        for(let i=0; i<n.length; i++){
-            if(!n[i].visited){unvisited.push(n[i]);}
-        }
-        return unvisited;
+    availableNeighbors(cell){
+        let available = []
+
+        if(!cell.walls[0] && !this.at(cell.row-1, cell.col).visited){available.push(this.at(cell.row-1, cell.col));}
+        if(!cell.walls[1] && !this.at(cell.row, cell.col-1).visited){available.push(this.at(cell.row, cell.col-1));}
+        if(!cell.walls[2] && !this.at(cell.row+1, cell.col).visited){available.push(this.at(cell.row+1, cell.col));}
+        if(!cell.walls[3] && !this.at(cell.row, cell.col+1).visited){available.push(this.at(cell.row, cell.col+1));}
+
+        return available;
     }
 
     removeWall(cell, adjacentCell){
