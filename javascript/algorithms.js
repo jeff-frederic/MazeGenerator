@@ -25,9 +25,6 @@ export async function DepthFirstSearch(view, cell, grid, delay){
             grid.removeWall(curr, adj);
             adj.visited = true;
             
-            if(delay){
-                await new Promise(resolve => setTimeout(resolve, delay));
-            }
             
             view.displayCell(curr); 
             view.displayCell(adj);
@@ -35,11 +32,15 @@ export async function DepthFirstSearch(view, cell, grid, delay){
             stack.push(curr);
             stack.push(adj);
         }
+        
+        if(delay){
+            await new Promise(resolve => setTimeout(resolve, 1));
+        }
     }
     view.clearGridColors(grid);
 }
 
-export async function solution(view, grid, cell, endCell){
+export function solution(view, grid, cell, endCell){
     let stack = [];
     stack.push(cell);
     cell.visited = true;
@@ -56,8 +57,8 @@ export async function solution(view, grid, cell, endCell){
             let adj = available[Math.floor(Math.random()*available.length)];
             
             adj.visited = true;
-            view.displayCell(adj);
             view.displayCell(curr); 
+            view.displayCell(adj);
             stack.push(curr);
             stack.push(adj);
             

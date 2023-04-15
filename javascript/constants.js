@@ -1,7 +1,7 @@
 
 
-export const NUM_OF_ROWS = 150;
-export const NUM_OF_COLS = 150;
+export const NUM_OF_ROWS = 10;
+export const NUM_OF_COLS = 10;
 
 export const CELL_WIDTH = 15;
 export const CELL_HEIGHT = 15;
