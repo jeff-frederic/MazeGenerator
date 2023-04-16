@@ -11,8 +11,10 @@ export function buildView(){
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
-    const NUM_OF_ROWS = c.NUM_OF_ROWS;
-    const NUM_OF_COLS = c.NUM_OF_COLS;
+    const VISUALIZE = document.getElementById('visualize').checked;
+
+    const NUM_OF_ROWS = document.getElementById('rows').value;
+    const NUM_OF_COLS = document.getElementById('cols').value;
 
     const CELL_WIDTH = c.CELL_WIDTH;
     const CELL_HEIGHT = c.CELL_HEIGHT;
@@ -59,20 +61,21 @@ export function buildView(){
             }
         },
         displayGrid(grid){
-            for(let i=0; i<c.NUM_OF_ROWS; i++){
-                for(let j=0; j<c.NUM_OF_COLS; j++){
+            for(let i=0; i<NUM_OF_ROWS; i++){
+                for(let j=0; j<NUM_OF_COLS; j++){
                     this.displayCell(grid.at(i, j));
                 }
             }
         },
         clearGridColors(grid){
-            for(let i=0; i<c.NUM_OF_ROWS; i++){
-                for(let j=0; j<c.NUM_OF_COLS; j++){
+            for(let i=0; i<NUM_OF_ROWS; i++){
+                for(let j=0; j<NUM_OF_COLS; j++){
                     let cell = grid.at(i, j);
                     cell.resetCellFlags();
                     this.displayCell(cell);
                 }
             }
-        }
+        }, 
+        NUM_OF_ROWS, NUM_OF_COLS, VISUALIZE
     }
 }

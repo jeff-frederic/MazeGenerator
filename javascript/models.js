@@ -5,8 +5,6 @@
  *      on cells.
  */
 
-import * as c from "./constants.js";
-
 
 export class Cell{
     constructor(row, col){
@@ -88,7 +86,7 @@ export class Grid{
             neighbors.push(top);
         }
     
-        if(row < c.NUM_OF_ROWS-1){
+        if(row < this.rows-1){
             bottom = this.at(row+1, col);
             neighbors.push(bottom);
         }
@@ -98,7 +96,7 @@ export class Grid{
             neighbors.push(left);
         }
     
-        if(col < c.NUM_OF_COLS-1){
+        if(col < this.cols-1){
             right = this.at(row, col+1);
             neighbors.push(right);
         }
