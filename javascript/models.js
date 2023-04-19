@@ -1,11 +1,25 @@
 /**
- * Object models to assist with the manipulation of elements in the maze.
- *  - Cell : Object that handles a single cell in the maze
- *  - Grid : Object that manages the grid as a whole, performing operations
- *      on cells.
+ * Object models used to control how the individual 
+ * cells of the grid, and how the grid uses those cells
+ * to produce a maze.
+ * 
+ * Created by @jeff-frederic
+ * April, 2023
+ * NOT MAINTAINED
  */
 
 
+/**
+ * Cell object that has unique properties which 
+ * we use to control the behavior of the cell and
+ * how it interacts with other cells in the grid.
+ *  this.row = location in row
+ *  this.col = location in col
+ *  this.active = if the cell is currently being visited
+ *  this.visited = if the cell has been visited
+ *  this.target = if the cell is of higher importance
+ *  this.walls = which walls are up (true=wall, false=no wall)
+ */
 export class Cell{
     constructor(row, col){
         this.row = row;
@@ -19,6 +33,7 @@ export class Cell{
         // Walls => {top, left, bottom, right}
     }
 
+    // Turns off a specifed wall
     disableWall(wall){
         switch (wall){
             case 'top':
@@ -38,12 +53,15 @@ export class Cell{
         }
     }
 
+    // Brings back the cell to the original settings
     resetCell(){
         this.active = false;
         this.visited = false;
         this.walls = [true, true, true, true];
     }
 
+
+    // Only resets the flags of the cell
     resetCellFlags(){
         this.active = false;
         this.visited = false;
@@ -52,6 +70,15 @@ export class Cell{
 
 
 
+
+/**
+ * Grid object in charge of managing the 2D array containing 
+ * all Cell objects. We will use this object to take a look at
+ * neighboring cells, if there is a clear path, etc. 
+ *  this.rows = height of grid
+ *  this.cols = width of grid
+ *  this.grid = container for 2D array
+ */
 export class Grid{
     constructor(rows, cols){
         this.rows = rows;
@@ -59,6 +86,7 @@ export class Grid{
         this.grid = [];
     }
 
+    // Creates the 2D array with Cells
     load(){
         this.grid = new Array(this.rows);
         for(let i=0; i<this.rows; i++){
@@ -69,14 +97,17 @@ export class Grid{
         }
     }
 
+    // Clears the grid container
     clear(){
         this.grid = [];
     }
 
+    // Returns a cell at a specific location
     at(row, col){
         return this.grid[row][col];
     }
 
+    // Returns the neighbors of a given cell
     neighbors(cell){
         let row = cell.row, col = cell.col;
         let top, left, bottom, right;
@@ -104,6 +135,8 @@ export class Grid{
         return neighbors;
     }
 
+    // Returns neighbors that have a clear path
+    // from the specified cell
     availableNeighbors(cell){
         let available = []
 
@@ -115,11 +148,11 @@ export class Grid{
         return available;
     }
 
+    // Removes a wall between a given cell 
+    // and a adjacent cell.
     removeWall(cell, adjacentCell){
         let x = cell.row, y = cell.col;
         let x_adj = adjacentCell.row, y_adj = adjacentCell.col;
-
-        // Might need to check that they are ACTUALLY adjacent
 
         if(x == x_adj){
             if(y_adj > y){

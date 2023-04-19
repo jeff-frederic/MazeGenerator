@@ -1,10 +1,22 @@
 /**
- * Implementation of all maze generation algorithms.
+ * Algorithms needed to properly create and 
+ * solve a Maze. 
  * 
+ * Created by @jeff-frederic
+ * April, 2023
+ * NOT MAINTAINED
  */
 
 
-
+/**
+ * Depth First Search algorithm that will starts at a specified cell, 
+ * and begins randomly visiting and removing walls of all unvisited neighbors 
+ * until there are no more left. Ending result is a maze.   
+ * @param {View} view Used to display the resulting/changing grid 
+ * @param {Cell} cell Cell where DFS will start from 
+ * @param {Grid} grid Used to manage Cell objects and find their neighbors
+ * @param {Integer} delay Specifes if DFS should have a slight delay
+ */
 export async function DepthFirstSearch(view, cell, grid, delay){
     let stack = [];
     stack.push(cell);
@@ -40,6 +52,16 @@ export async function DepthFirstSearch(view, cell, grid, delay){
     view.clearGridColors(grid);
 }
 
+
+/**
+ * Function that uses Depth First Search to find the path from 
+ * a starting cell to and ending cell. Result of this function 
+ * is that it will highlight all cells in that path in the grid.
+ * @param {view} view Will allow display of solution
+ * @param {Grid} grid Used to manage all cells
+ * @param {Cell} cell starting cell of the path 
+ * @param {Cell} endCell ending cell of the path
+ */
 export function solution(view, grid, cell, endCell){
     let stack = [];
     stack.push(cell);
@@ -75,7 +97,12 @@ export function solution(view, grid, cell, endCell){
 
 }
 
-
+/**
+ * Function that takes in a integer and using the Math.random() function, 
+ * find a random integer in the range (0-(max-1)).
+ * @param {*} max Max value of range (not including max).
+ * @returns Random integer between 0 and max (not including max).
+ */
 export function randomInt(max){
     return Math.floor(Math.random() * max);
 }

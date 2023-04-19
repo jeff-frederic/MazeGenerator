@@ -1,7 +1,11 @@
 /**
- * Builds components needed to properly manage the canvas drawings, size, 
- * appearance, updating, etc. 
- * @returns Functions that control the canvas
+ * Initializes all of the components needed for the actual display 
+ * onto the webpage. Takes control of how Cell and Grid objects are
+ * displayed onto the <canvas> and how the constants are used.
+ * 
+ * Created by @jeff-frederic
+ * April, 2023
+ * NOT MAINTAINED
  */
 
 import * as c from "./constants.js";
@@ -23,6 +27,11 @@ export function buildView(){
     canvas.height = CELL_HEIGHT*NUM_OF_ROWS;
 
     return {
+        /**
+         * Takes in a cell, displays it according to its
+         * characteristics.
+         * @param {Cell} cell 
+         */
         displayCell(cell){
             let x = cell.col*CELL_WIDTH, y = cell.row*CELL_HEIGHT;
 
@@ -60,6 +69,11 @@ export function buildView(){
                 ctx.stroke();
             }
         },
+        /**
+         * Takes in a Grid, and displays it according to its 
+         * characteristics.
+         * @param {Grid} grid 
+         */
         displayGrid(grid){
             for(let i=0; i<NUM_OF_ROWS; i++){
                 for(let j=0; j<NUM_OF_COLS; j++){
@@ -67,6 +81,11 @@ export function buildView(){
                 }
             }
         },
+        /**
+         * Removes all colors of the grid
+         * by completely resetting it.
+         * @param {Grid} grid 
+         */
         clearGridColors(grid){
             for(let i=0; i<NUM_OF_ROWS; i++){
                 for(let j=0; j<NUM_OF_COLS; j++){
@@ -76,6 +95,8 @@ export function buildView(){
                 }
             }
         }, 
+        // Returing the specified rows, cols, and boolean display vars
+        // in order to pass them on to Grid and Cell objects
         NUM_OF_ROWS, NUM_OF_COLS, VISUALIZE
     }
 }
